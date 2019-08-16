@@ -28,8 +28,8 @@ const Signup = () => {
                 console.log('signup result', signupResult);
                 resolve(signupResult)
             }).catch(err => {
-                console.log('err while signup', err);  
-                reject(err.error)
+                const response = err.response
+                reject(response.data.error)
             })
         })
         
@@ -61,22 +61,26 @@ const Signup = () => {
         </form>
     }
     
-    const showError = () => {
-        return <div className="alert alert-danger" style={{display:error ? "":"none"}}>
+    const showError = () => {     
+        console.log('fff', success);
+        console.log('fff',error);
+        
+        return <div className="alert alert-danger" style={{display:error ? " ":"none"}}>
             {error}
         </div>
     }
     const showSuccess = () => {
-        return <div className="alert alert-info"  style={{display:success ? "":"none"}}>
+        return <div className="alert alert-info"  style={{display:success ? " ":"none"}}>
         New account Created .Please sign in.
     </div>
         
     }
     return (<Layout title="Signup Page" description="Node React ecom App" className="container col-md-8 offset-md-2" >
-        
-        {signUpForm()}
-        {showError()}
         {showSuccess()}
+        {showError()} 
+        {signUpForm()}
+        
+        
     </Layout>)
 }
 
